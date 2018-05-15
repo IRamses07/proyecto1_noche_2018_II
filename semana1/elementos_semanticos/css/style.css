@@ -8,3 +8,34 @@ header nav a{
     color: #ffffff;
     text-decoration: none;
 }
+#sec_info{
+    display: flow-root;
+}
+#sec_info h2{
+    background: #2f3640;
+    font-size: 24px;
+    color: #f5f6fa;
+    padding: 13px 0px 13px 0px;
+    text-align: center;
+    text-decoration: underline #e84118;
+}
+#sec_info .left_column{
+    width: 60%;
+    float: left;
+    padding-top: 25px;
+    background: #2f3640;
+}
+#sec_info .right_column{
+    width: 40%;
+    float: right;
+}
+#sec_info .left_column p{
+    width: 60%;
+    padding: 0px 20% 0px 20%;
+    margin-bottom: 25px;
+    color: #f5f6fa;
+}
+.img_container img{
+    width: 100%;
+    height: 100%;
+}
