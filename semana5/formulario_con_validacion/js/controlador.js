@@ -65,6 +65,27 @@ function imprimirListaPersonas(){
 function validar(){
     let bError = false;
 
+    //Validación del nombre completo
+    if(inputNombre.value == ''){
+        inputNombre.classList.add('error_input');
+        bError = true;
+    }else{
+        inputNombre.classList.remove('error_input');
+    }
+    //Validación del correo
+    if(inputEmail.value == ''){
+        inputEmail.classList.add('error_input');
+        bError = true;
+    }else{
+        inputEmail.classList.remove('error_input');
+    }
+    //Validación del teléfono
+    if(inputTelefono.value == ''){
+        inputTelefono.classList.add('error_input');
+        bError = true;
+    }else{
+        inputTelefono.classList.remove('error_input');
+    }
 
     return bError;
 };
