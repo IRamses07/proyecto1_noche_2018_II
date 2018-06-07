@@ -65,8 +65,11 @@ function imprimirListaPersonas(){
 function validar(){
     let bError = false;
 
+    let regexSoloLetras = /^[a-z A-ZáéíóúÁÉÍÓÚñÑ]+$/;
+    let regexSoloNumeros = /^[0-9]{1,3}$/;
+
     //Validación del nombre completo
-    if(inputNombre.value == ''){
+    if(inputNombre.value == '' || (regexSoloLetras.test(inputNombre.value)==false) ){
         inputNombre.classList.add('error_input');
         bError = true;
     }else{
@@ -85,6 +88,31 @@ function validar(){
         bError = true;
     }else{
         inputTelefono.classList.remove('error_input');
+    }
+    //Validación de la edad
+    if(inputEdad.value == '' || (regexSoloNumeros.test(inputEdad.value) == false)){
+        inputEdad.classList.add('error_input');
+        bError = true;
+    }else{
+        inputEdad.classList.remove('error_input');
+    }
+
+    //Validación de la contraseña
+
+    if(inputContrasenna.value == ''){
+        inputContrasenna.classList.add('error_input');
+        bError = true;
+    }else{
+        inputContrasenna.classList.remove('error_input');
+    }
+
+    if(inputContrasenna.value != inputConfirmacion.value){
+        inputContrasenna.classList.add('error_input');
+        inputConfirmacion.classList.add('error_input');
+        bError = true;
+    }else{
+        inputContrasenna.classList.remove('error_input');
+        inputConfirmacion.classList.remove('error_input');
     }
 
     return bError;
