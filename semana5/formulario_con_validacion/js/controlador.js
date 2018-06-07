@@ -34,9 +34,21 @@ function obtenerDatos(){
     
     bError = validar();
     if(bError == true){
+        swal({
+            type : 'warning',
+            title : 'No se pudo registrar el usuario',
+            text: 'Por favor revise los campos en rojo',
+            confirmButtonText : 'Entendido'
+        });
         console.log('No se pudo registrar el usuario');
     }else{
         registrarPersona(infoPersona);
+        swal({
+            type : 'success',
+            title : 'Registro exitoso',
+            text: 'El usuario se registró adecuadamente',
+            confirmButtonText : 'Entendido'
+        });
         imprimirListaPersonas();
     }
     
@@ -90,7 +102,7 @@ function validar(){
         inputTelefono.classList.remove('error_input');
     }
     //Validación de la edad
-    if(inputEdad.value == '' || (regexSoloNumeros.test(inputEdad.value) == false)){
+    if(inputEdad.value == '' || (regexSoloNumeros.test(inputEdad.value) == false) || Number(inputEdad.value) < Number(inputEdad.min)  || Number(inputEdad.value) > Number(inputEdad.max)){
         inputEdad.classList.add('error_input');
         bError = true;
     }else{
