@@ -9,16 +9,21 @@ Responsabilidades del controlador
 
 'use strict';
 imprimirListaPersonas();
-let botonRegistrar = document.querySelector('#btnRegistrar');
+const botonRegistrar = document.querySelector('#btnRegistrar');
 
 botonRegistrar.addEventListener('click' , obtenerDatos);
 
-let inputNombre = document.querySelector('#txtNombre');
-let inputEmail = document.querySelector('#txtEmail');
-let inputTelefono = document.querySelector('#txtTelefono');
-let inputEdad = document.querySelector('#txtEdad');
-let inputContrasenna = document.querySelector('#txtContrasenna');
-let inputConfirmacion = document.querySelector('#txtConfirmacion');
+const inputNombre = document.querySelector('#txtNombre');
+const inputEmail = document.querySelector('#txtEmail');
+const inputTelefono = document.querySelector('#txtTelefono');
+const inputEdad = document.querySelector('#txtEdad');
+const inputContrasenna = document.querySelector('#txtContrasenna');
+const inputConfirmacion = document.querySelector('#txtConfirmacion');
+const inputFiltro = document.querySelector('#txtFiltro');
+
+inputFiltro.addEventListener('keyup' , function(){
+    imprimirListaPersonas(inputFiltro.value)
+});
 
 function obtenerDatos(){
     
@@ -56,31 +61,37 @@ function obtenerDatos(){
     }
     
 };
-function imprimirListaPersonas(){
+function imprimirListaPersonas(pFiltro){
     let listaPersonas = obtenerListaPersonas();
     let tbody = document.querySelector('#tblPersonas tbody');
+    if(!pFiltro){
+        pFiltro = '';
+    }
     tbody.innerHTML = '';
 
     for(let i = 0; i < listaPersonas.length; i++){
-        let fila = tbody.insertRow();
-
-        let cFoto = fila.insertCell();
-        let cNombre = fila.insertCell();
-        let cEmail = fila.insertCell();
-        let cTelefono = fila.insertCell();
-        let cEdad = fila.insertCell();
-
-        let imagen = document.createElement('img');
-        imagen.src = listaPersonas[i]['foto'];
-        imagen.classList.add('imageSettings');
-
-        cFoto.appendChild(imagen);
-
-
-        cNombre.innerHTML = listaPersonas[i]['nombre_completo'];
-        cEmail.innerHTML = listaPersonas[i]['correo'];
-        cTelefono.innerHTML = listaPersonas[i]['telefono'];
-        cEdad.innerHTML = listaPersonas[i]['edad'];
+        if(listaPersonas[i]['nombre_completo'].toLowerCase().includes(pFiltro.toLowerCase())){
+            let fila = tbody.insertRow();
+            
+            let cFoto = fila.insertCell();
+            let cNombre = fila.insertCell();
+            let cEmail = fila.insertCell();
+            let cTelefono = fila.insertCell();
+            let cEdad = fila.insertCell();
+    
+            let imagen = document.createElement('img');
+            imagen.src = listaPersonas[i]['foto'];
+            imagen.classList.add('imageSettings');
+    
+            cFoto.appendChild(imagen);
+    
+    
+            cNombre.innerHTML = listaPersonas[i]['nombre_completo'];
+            cEmail.innerHTML = listaPersonas[i]['correo'];
+            cTelefono.innerHTML = listaPersonas[i]['telefono'];
+            cEdad.innerHTML = listaPersonas[i]['edad'];
+        }
+        
     }
 
 };
@@ -149,3 +160,4 @@ function limpiarFormulario(){
     inputContrasenna.value = '';
     inputConfirmacion.value = '';
 }
+

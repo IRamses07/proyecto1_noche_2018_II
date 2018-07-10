@@ -9,6 +9,11 @@ router.route('/registrar_usuario')
     users.registrar(req, res);
 });
 
+router.route('/agregar_titulo')
+.post(function(req, res){
+users.agregar_titulo(req, res);
+});
+
 router.route('/listar_usuarios')
     .get(function(req, res){
     users.listar(req, res);

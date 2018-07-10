@@ -30,3 +30,26 @@ module.exports.listar = function(req, res){
             res.send(usuarios);
         });
 };
+
+module.exports.agregar_titulo = function(req, res){
+    
+    userModel.update(
+        {_id: req.body._id}, 
+        {$push: 
+            {'titulos':
+                {
+                    titulo: req.body.titulo, 
+                    institucion: req.body.institucion, 
+                    anno: req.body.anno
+                }
+            }
+        },
+        function(error){
+            if(error){
+                res.json({success : false, msg : 'No se pudo registrar el título, ocurrió el siguiente error' + error});
+            }else{
+                res.json({success : true, msg : 'El título se registró con éxito'});
+            }
+        }
+    )
+};
