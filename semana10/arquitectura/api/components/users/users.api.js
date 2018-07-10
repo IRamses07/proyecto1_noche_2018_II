@@ -9,7 +9,8 @@ module.exports.registrar = function(req, res){
         correo : req.body.correo,
         telefono : req.body.telefono,
         edad : req.body.edad,
-        contrasenna : req.body.contrasenna 
+        contrasenna : req.body.contrasenna ,
+        foto : req.body.foto
     });
 
     nuevoUsuario.save(function(error){

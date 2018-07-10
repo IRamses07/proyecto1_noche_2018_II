@@ -4,3 +4,7 @@ html{
 .error_input{
     border: 2px solid #d63031;
 }
+.imageSettings{
+    width: 100px;
+    height: 100px;
+}

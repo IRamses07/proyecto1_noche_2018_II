@@ -21,7 +21,7 @@ let inputContrasenna = document.querySelector('#txtContrasenna');
 let inputConfirmacion = document.querySelector('#txtConfirmacion');
 
 function obtenerDatos(){
-    let infoPersona =[];
+    
     let bError = false;
 
     let sNombre = inputNombre.value;    
@@ -31,7 +31,7 @@ function obtenerDatos(){
     let sContrasenna = inputContrasenna.value;
     let sConfirmacion = inputConfirmacion.value;
 
-    infoPersona.push(sNombre, sEmail, sTelefono, nEdad, sContrasenna);
+    
     
     bError = validar();
     if(bError == true){
@@ -43,7 +43,8 @@ function obtenerDatos(){
         });
         console.log('No se pudo registrar el usuario');
     }else{
-        registrarPersona(infoPersona);
+        console.log(imagenUrl);
+        registrarPersona(sNombre, sEmail, sTelefono, nEdad, sContrasenna, imagenUrl);
         swal({
             type : 'success',
             title : 'Registro exitoso',
@@ -63,10 +64,18 @@ function imprimirListaPersonas(){
     for(let i = 0; i < listaPersonas.length; i++){
         let fila = tbody.insertRow();
 
+        let cFoto = fila.insertCell();
         let cNombre = fila.insertCell();
         let cEmail = fila.insertCell();
         let cTelefono = fila.insertCell();
         let cEdad = fila.insertCell();
+
+        let imagen = document.createElement('img');
+        imagen.src = listaPersonas[i]['foto'];
+        imagen.classList.add('imageSettings');
+
+        cFoto.appendChild(imagen);
+
 
         cNombre.innerHTML = listaPersonas[i]['nombre_completo'];
         cEmail.innerHTML = listaPersonas[i]['correo'];
