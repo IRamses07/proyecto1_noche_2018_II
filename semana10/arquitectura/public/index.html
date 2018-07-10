@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+  
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <main>
+        <form>
+            <label for="txtNombre">Nombre completo</label>
+            <input type="text" id="txtNombre">
+            
+            <label for="txtEmail">Correo electrónico</label>
+            <input type="email" id="txtEmail">
+
+            <label for="txtTelefono">Teléfono</label>
+            <input type="tel" id="txtTelefono">
+
+            <label for="txtEdad">Edad</label>
+            <input type="number" id="txtEdad" min="0" max="120">
+
+            <label for="txtContrasenna">Contraseña</label>
+            <input type="password" id="txtContrasenna">
+
+            <label for="txtConfirmacion">Confirmación</label>
+            <input type="password" id="txtConfirmacion">
+
+            <button type="button" id="btnRegistrar">Registrar</button>
+        </form>
+        <table id="tblPersonas">
+            <thead>
+                <th>Nombre</th>
+                <th>Correo electrónico</th>
+                <th>Teléfono</th>
+                <th>Edad</th>
+            </thead>
+            <tbody>
+                
+            </tbody>
+        </table>
+    </main>
+    <script src="js/jquery-3.3.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2"></script>
+    <script src="js/servicio.js"></script>
+    <script src="js/controlador.js"></script>
+</body>
+</html>
