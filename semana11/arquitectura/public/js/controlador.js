@@ -9,10 +9,17 @@ Responsabilidades del controlador
 
 'use strict';
 let listaPersonas = obtenerListaPersonas();
+let idPersonaSeleccionada = '';
+
 imprimirListaPersonas();
 const botonRegistrar = document.querySelector('#btnRegistrar');
 
+const botonActualizar = document.querySelector('#btnActualizar');
+
+botonActualizar.hidden = true;
+
 botonRegistrar.addEventListener('click' , obtenerDatos);
+botonActualizar.addEventListener('click' , obtenerDatosEditar);
 
 const inputNombre = document.querySelector('#txtNombre');
 const inputEmail = document.querySelector('#txtEmail');
@@ -64,6 +71,45 @@ function obtenerDatos(){
     }
     
 };
+
+function obtenerDatosEditar(){
+    
+    let bError = false;
+
+    let sNombre = inputNombre.value;    
+    let sEmail = inputEmail.value;
+    let sTelefono = inputTelefono.value;
+    let nEdad = Number(inputEdad.value);
+    
+
+    
+    
+    //bError = validar();
+    if(bError == true){
+        swal({
+            type : 'warning',
+            title : 'No se pudo registrar el usuario',
+            text: 'Por favor revise los campos en rojo',
+            confirmButtonText : 'Entendido'
+        });
+        console.log('No se pudo registrar el usuario');
+    }else{
+        console.log(imagenUrl);
+        actualizarPersona(idPersonaSeleccionada,sNombre, sEmail, sTelefono, nEdad, imagen.src);
+        swal({
+            type : 'success',
+            title : 'Usuario actualizado',
+            text: 'El usuario se actualizó adecuadamente',
+            confirmButtonText : 'Entendido'
+        });
+        listaPersonas = obtenerListaPersonas();
+        imprimirListaPersonas();
+        limpiarFormulario();
+        botonActualizar.hidden = true;
+        botonRegistrar.hidden = false;
+    }
+    
+};
 function imprimirListaPersonas(pFiltro){
     
     let tbody = document.querySelector('#tblPersonas tbody');
@@ -108,7 +154,7 @@ function imprimirListaPersonas(pFiltro){
             aBorrar.classList.add('fa-trash');
             aBorrar.dataset._id =  listaPersonas[i]['_id'];
 
-            aModificar.addEventListener('click', obtenerDatosEditar);
+            aModificar.addEventListener('click', llenarDatosFormulario);
             aBorrar.addEventListener('click', borrarPersona);
 
             cConfiguracion.appendChild(aModificar);
@@ -180,14 +226,20 @@ function limpiarFormulario(){
     inputNombre.value = '';    
     inputEmail.value = '';
     inputTelefono.value ='';
-    inputEdad.value = 0;
+    inputEdad.value = '';
     inputContrasenna.value = '';
     inputConfirmacion.value = '';
+    idPersonaSeleccionada = '';
+    imagen.src = '';
 };
 
-function obtenerDatosEditar(){
-    let id =  this.dataset._id;// se obtiene el id del usuario seleccionado
-    let usuario = obtenerPersonaPorId(id);
+function llenarDatosFormulario(){
+    botonRegistrar.hidden = true;
+    botonActualizar.hidden = false;
+    
+    idPersonaSeleccionada =  this.dataset._id;// se obtiene el id del usuario seleccionado
+    
+    let usuario = obtenerPersonaPorId(idPersonaSeleccionada);
 
     inputNombre.value =  usuario['nombre_completo'];
     inputEmail.value = usuario['correo'];
@@ -199,5 +251,9 @@ function obtenerDatosEditar(){
 };
 
 function borrarPersona(){
+    let id = this.dataset._id;
+    borrarPersonaPorId(id);
+    listaPersonas = obtenerListaPersonas();
+    imprimirListaPersonas();
 
 }

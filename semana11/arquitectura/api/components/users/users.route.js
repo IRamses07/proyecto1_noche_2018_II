@@ -22,6 +22,16 @@ router.route('/listar_usuarios')
 router.route('/buscar_usuario_id')
     .post(function(req,res){
     users.buscar_usuario_id(req, res);
-})
+});
+
+router.route('/actualizar_usuario')
+    .post(function(req, res){
+    users.actualizar(req, res);
+});
+
+router.route('/borrar_usuario')
+    .post(function(req, res){
+    users.borrar(req, res);
+});
 
 module.exports = router;
